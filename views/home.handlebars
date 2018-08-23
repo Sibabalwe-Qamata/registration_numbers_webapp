@@ -1,0 +1,47 @@
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns"> 
+        <h1>Registration Numberplates</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      
+          <form>
+            <div class="eight columns">
+              <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumber"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a Number Plate e.g 'CA31004'">
+            </div>
+            <div class="four columns">
+               <button class="button add">Add</button>
+            </div>
+          </form>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+
+        
+        
+         
+          <button class="button reset">Reset</button>
+        <div class="normalFilter">
+            <label for="Town to Filter: "></label>
+            <select class="selectWhichTown" name="selectTown">
+              <option class="selectWhichTown" value="All">All Towns</option>
+              <option class="selectWhichTown" value="CA ">Cape Town</option>
+              <option class="selectWhichTown" value="CJ ">Paarl</option>
+              <option class="selectWhichTown" value="CW ">Worcester</option>
+              <option class="selectWhichTown" value="CAW">George</option>
+              <option class="selectWhichTown" value="CAW">Somerset West</option>
+            </select>
+          </div>
+        <button class="button show">Filter</button>
+
+        <div class=" errorDisplay">
+        </div>
+        <ul class"list-plates" id="errors">
+        </ul>
+        <ul class"list-plates" id="display">
+        </ul>
+      </div>
+    </div>
+  </div>
