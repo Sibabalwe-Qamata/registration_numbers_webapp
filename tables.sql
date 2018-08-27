@@ -1,13 +1,16 @@
-drop table;
 
-create table registration_numbers(
+create table reg_numbers(
 	id serial not null primary key,
-    reg_number char(100) not null,
-	location_indicator text
+    reg_number text not null,
+	location_indicator text not null
 );
 
 create table towns(
 	id serial not null primary key,
-	town char(100) not null,
-    foreign key (location_indicator) references (registration_numbers id)
+	town_reg text not null,
+	town_id int,
+    foreign key (town_id) references registration_numbers(id)
 );
+
+
+-- Add the locations as well as towns

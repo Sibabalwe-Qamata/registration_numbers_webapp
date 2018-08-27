@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+let regNumFactory = require('./public/js/registrationPlates');
+
 var app = express();
 
 // view engine setup
@@ -25,39 +27,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-/// catch 404 and forwarding to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
 
-/// error handlers
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
+//Database Connection ...
+const pg = require("pg");
+const Pool = pg.Pool;
+
+let useSSL = false;
+let local = process.env.LOCAL || false;
+
+if (process.env.DATABASE_URL && !local) {
+    useSSL = true;
 }
 
-// production error handler
-// no stacktraces leaked to user
-// app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//         message: err.message,
-//         error: {}
-//     });
-// });
+const connectionString = process.env.DATABASE_URL || 'postgresql://coder:pg123@localhost:5432/reg_numbers';
+
+const pool = new Pool({
+    connectionString,
+    ssl: useSSL
+});
 
 
-// module.exports = app;
+
+// app.get('/reg_numbers', categories.get);
+// app.post('/reg_numbers', categories.update);
+
 //configure the port number using and environment number
 var portNumber = process.env.PORT || 3313;
 

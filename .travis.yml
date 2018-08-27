@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - "8.9.4"
+
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/reg_numb
+
+before_script:
+  - psql -c 'create database reg_numb;' -U postgres
+  - psql -U postgres -d reg_numb -a -f tables.sql
+
+addons:
+    apt:
+    packages:
+    - postgresql-server-dev-9.2
