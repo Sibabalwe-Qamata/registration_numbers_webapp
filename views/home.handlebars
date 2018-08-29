@@ -7,12 +7,14 @@
 
     <div class="row">
         <div class="twelve columns">
-          <form  class="" action="/reg_numbers" method="post">
+          {{!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" --}}
             <div class="twelve columns">
-              <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumber"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a Number Plate e.g 'CA31004'">
-               <button class="button add">Add</button>
+              <form action="/reg_numbers" method="post">
+              <input name="regValue" id="numberPlate" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA31004'"/>
+               <input type="submit" value="Add"> 
+              </form>
             </div>
-          </form>
+       
         </div>
     </div>
 

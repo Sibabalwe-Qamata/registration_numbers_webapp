@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-let regNumFactory = require('./public/js/registrationPlates');
+let regNumFactory = require('./registrationPlates');
+
+
 
 var app = express();
 
@@ -24,10 +26,8 @@ app.use(bodyParser.urlencoded());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-
-
+// app.use('/', routes);
+// app.use('/reg_numbers', routes);
 
 //Database Connection ...
 const pg = require("pg");
@@ -47,10 +47,38 @@ const pool = new Pool({
     ssl: useSSL
 });
 
+let regNumbers = regNumFactory(pool);
+
+app.get('/', async function(req, res) {
+    res.render('home');
+  });
 
 
-// app.get('/reg_numbers', categories.get);
-// app.post('/reg_numbers', categories.update);
+  app.post('/reg_numbers', async function(req,res){
+    
+    try{
+
+        let {regValue} = req.body;
+        //console.log(regValue);
+
+        let regInput = await regNumbers.enterRegPlate(regValue);
+
+        console.log(regInput);
+    }
+
+    catch(error){
+
+    }
+
+       // enterRegPlate: setRegPlate,
+    //let regInput =  regNumbers.enterRegPlate(regValue);
+    
+  
+   
+    res.render('home');
+  });
+
+
 
 //configure the port number using and environment number
 var portNumber = process.env.PORT || 3313;
