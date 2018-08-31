@@ -33,9 +33,10 @@ module.exports =  function(pool)
             console.log("Number Plate: ", formatedPlate);
 
             let checkReg =  await pool.query('SELECT id FROM reg_numbers WHERE reg_number=$1', [formatedPlate])
-            if(checkReg.rowCount >0){
-                await pool.query('INSERT into reg_numbers  (reg_number location_indicator) values ($1,$2)', [formatedPlate,town_locator]);
-                
+            
+            console.log(checkReg.rowCount);
+            if(checkReg.rowCount < 1){
+                await pool.query('INSERT into reg_numbers  (reg_number,location_indicator) values ($1,$2)', [formatedPlate,town_locator]);
                 return formatedPlate;
             }
 
@@ -69,15 +70,10 @@ module.exports =  function(pool)
   
     return {
         enterRegPlate: setRegPlate,
-    
         validateInput: verifyInput,
-
         getPlate: getRegPlates,
-        
-
-        filterTown:filterRegPlate,
-
-        item : getItem
+    
+        filterTown:filterRegPlate
       
      }
 

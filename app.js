@@ -9,8 +9,6 @@ var users = require('./routes/users');
 
 let regNumFactory = require('./registrationPlates');
 
-
-
 var app = express();
 
 // view engine setup
@@ -40,7 +38,7 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://coder:pg123@localhost:5432/reg_numbers';
+const connectionString = process.env.DATABASE_URL || 'postgresql://coder:pg123@localhost:5432/reg_numb';
 
 const pool = new Pool({
     connectionString,
@@ -59,9 +57,13 @@ app.get('/', async function(req, res) {
     try{
 
         let {regValue} = req.body;
-        //console.log(regValue);
+        console.log(regValue);
 
         let regInput = await regNumbers.enterRegPlate(regValue);
+
+        let value = await regNumbers.validateInput(regValue);
+        console.log(value);
+
 
         console.log(regInput);
     }
@@ -69,16 +71,11 @@ app.get('/', async function(req, res) {
     catch(error){
 
     }
-
        // enterRegPlate: setRegPlate,
     //let regInput =  regNumbers.enterRegPlate(regValue);
-    
-  
-   
+
     res.render('home');
   });
-
-
 
 //configure the port number using and environment number
 var portNumber = process.env.PORT || 3313;
