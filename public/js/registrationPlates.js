@@ -6,6 +6,8 @@ module.exports =  function(pool)
     let town = '';
     let RegItem;
 
+    let townsList = [];
+
    // var plateStored = NumberPlateDatabase || {};
 
     async function verifyInput(getRegNum)
@@ -45,8 +47,9 @@ module.exports =  function(pool)
         }
     async function getRegPlates()
     {
-        let allRegs = await pool.query('SELECT id from reg_numbers');
-        return allRegs.rows;
+        let allRegs = await pool.query('SELECT * from reg_numbers');
+
+        return  allRegs.rows;
     }
 
      async function filterRegPlate(TownChoice) 

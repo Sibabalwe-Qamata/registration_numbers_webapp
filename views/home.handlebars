@@ -34,15 +34,21 @@
                     </select>
                   </div>
             <button class="button show">Filter</button>
-
             </form>
-            <div class=" errorDisplay">
-            </div>
-            <ul class"list-plates" id="errors">
-            </ul>
-            <ul class"list-plates" id="display">
-            </ul>
           </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="twelve columns">
+
+           <ul class="registrationNum">
+            {{#each displayRegs}}
+                    <li>{{reg_number}}</li>
+             {{/each}} 
+            </ul>
+      </div>
     </div>
 
     <div class="row">

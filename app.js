@@ -47,34 +47,29 @@ const pool = new Pool({
 let regNumbers = regNumFactory(pool);
 
 app.get('/', async function(req, res) {
-    res.render('home');
+
+    try{
+        let displayRegs =  await regNumbers.getPlate();
+        res.render('home', {displayRegs});
+    }
+    catch(error){
+
+    }
+
   });
 
 
   app.post('/reg_numbers', async function(req,res){
-        
-    console.log("Route working!!!!");
     try{
 
         let {regValue} = req.body;
-        console.log("Inside the Route: ", regValue);
-
-        let regInput = await regNumbers.enterRegPlate(regValue);
-
-        console.log("From the Factory: ", regInput);
-        //console.log(value);
-
-
-        
+         await regNumbers.enterRegPlate(regValue);
+        let displayRegs =  await regNumbers.getPlate();
+        res.render('home', {displayRegs});
     }
-
     catch(error){
 
     }
-       // enterRegPlate: setRegPlate,
-    //let regInput =  regNumbers.enterRegPlate(regValue);
-
-    res.render('home');
   });
 
 //configure the port number using and environment number

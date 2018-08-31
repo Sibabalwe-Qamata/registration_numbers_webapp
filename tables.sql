@@ -14,3 +14,4 @@ create table towns(
 
 
 -- Add the locations as well as towns
+

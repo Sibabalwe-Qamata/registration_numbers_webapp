@@ -65,7 +65,7 @@ span{
 }
 
 
-.registrationNum {
+.registrationNum li {
     background-color:grey;
     background-position: 10px 10px;
     border: 1px solid black;
@@ -78,6 +78,8 @@ span{
     text-align: center;
     width: 200px;
     float: left;
+    list-style-type: none;
+    
 
 }
 
