@@ -30,17 +30,11 @@ module.exports =  function(pool)
             }
             let town_locator = numPlate.slice(0,3).toUpperCase();
             let formatedPlate = numPlate.toUpperCase();
-
-            // console.log("Location Indicator: ", town_locator);
-            // console.log("Number Plate: ", formatedPlate);
-
-            // console.log("Get plate:", await getRegPlates());
-
             let checkReg =  await pool.query('SELECT id FROM reg_numbers WHERE reg_number=$1', [formatedPlate])
-            
-            //console.log(checkReg.rowCount);
+    
             if(checkReg.rowCount < 1){
-                await pool.query('INSERT into reg_numbers  (reg_number,location_indicator) values ($1,$2)', [formatedPlate,town_locator]);
+                await pool.query('INSERT into towns  (town_reg,location_indicator) values ($1,$2)', ['Cape Town',town_locator]);
+                await pool.query('INSERT into reg_numbers  (reg_number) values ($1)', [formatedPlate]);
                 return formatedPlate;
             }
 
@@ -48,11 +42,15 @@ module.exports =  function(pool)
     async function getRegPlates()
     {
         let allRegs = await pool.query('SELECT * from reg_numbers');
-
         return  allRegs.rows;
     }
 
-     async function filterRegPlate(TownChoice) 
+    async function resetDB(){
+        let clearDB = await pool.query("DELETE from reg_numbers");
+        return clearDB;
+    }
+
+    async function filterRegPlate(TownChoice) 
         {
                 var townSelected = [];
             
@@ -77,6 +75,7 @@ module.exports =  function(pool)
         enterRegPlate: setRegPlate,
         validateInput: verifyInput,
         getPlate: getRegPlates,
+        resetDataBase: resetDB,
     
         filterTown:filterRegPlate
       

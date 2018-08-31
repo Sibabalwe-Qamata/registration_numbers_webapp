@@ -64,13 +64,28 @@ app.get('/', async function(req, res) {
 
         let {regValue} = req.body;
          await regNumbers.enterRegPlate(regValue);
-        let displayRegs =  await regNumbers.getPlate();
+        let showPlates =  await regNumbers.getPlate();
+        let displayRegs = showPlates.reverse();
+
         res.render('home', {displayRegs});
     }
     catch(error){
 
     }
   });
+
+
+  app.get("/reset", async function(req,res){
+    try{
+        let deleteRegNumbs = await regNumbers.resetDataBase();
+
+        //Need to add a flash message indicating that the DB has been resetted.
+        res.redirect("/");
+    }
+    catch(error){
+        res.redirect("/");
+    }
+})
 
 //configure the port number using and environment number
 var portNumber = process.env.PORT || 3313;

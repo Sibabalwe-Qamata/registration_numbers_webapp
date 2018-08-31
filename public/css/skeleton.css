@@ -112,8 +112,7 @@
   .columns {
     margin-left: 4%; }
   .column:first-child,
-  .columns:first-child {
-    margin-left: 0; }
+  .columns:first-child { }
 
   .one.column,
   .one.columns                    { width: 4.66666666667%; }
