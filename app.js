@@ -5,9 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
-let regNumFactory = require('./registrationPlates');
+let regNumFactory = require('./public/js/registrationPlates');
 
 var app = express();
 
@@ -53,19 +52,20 @@ app.get('/', async function(req, res) {
 
 
   app.post('/reg_numbers', async function(req,res){
-    
+        
+    console.log("Route working!!!!");
     try{
 
         let {regValue} = req.body;
-        console.log(regValue);
+        console.log("Inside the Route: ", regValue);
 
         let regInput = await regNumbers.enterRegPlate(regValue);
 
-        let value = await regNumbers.validateInput(regValue);
-        console.log(value);
+        console.log("From the Factory: ", regInput);
+        //console.log(value);
 
 
-        console.log(regInput);
+        
     }
 
     catch(error){

@@ -29,12 +29,14 @@ module.exports =  function(pool)
             let town_locator = numPlate.slice(0,3).toUpperCase();
             let formatedPlate = numPlate.toUpperCase();
 
-            console.log("Location Indicator: ", town_locator);
-            console.log("Number Plate: ", formatedPlate);
+            // console.log("Location Indicator: ", town_locator);
+            // console.log("Number Plate: ", formatedPlate);
+
+            // console.log("Get plate:", await getRegPlates());
 
             let checkReg =  await pool.query('SELECT id FROM reg_numbers WHERE reg_number=$1', [formatedPlate])
             
-            console.log(checkReg.rowCount);
+            //console.log(checkReg.rowCount);
             if(checkReg.rowCount < 1){
                 await pool.query('INSERT into reg_numbers  (reg_number,location_indicator) values ($1,$2)', [formatedPlate,town_locator]);
                 return formatedPlate;
@@ -43,7 +45,7 @@ module.exports =  function(pool)
         }
     async function getRegPlates()
     {
-        let allRegs = await pool.query('SELECT id from reg_number');
+        let allRegs = await pool.query('SELECT id from reg_numbers');
         return allRegs.rows;
     }
 

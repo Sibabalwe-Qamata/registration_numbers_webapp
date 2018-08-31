@@ -21,7 +21,6 @@ describe("The Registration Numbers WebApp Database Unit Tests", async function()
 
   it("It should Return the  Registration Number Plate that was added to the Database.", async function() {
     let reg = await regNumFactory(pool);
-
   ;
     assert.equal(await reg.enterRegPlate("CA 1485"), "CA 1485");
   });
