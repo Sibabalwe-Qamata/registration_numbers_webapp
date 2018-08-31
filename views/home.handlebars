@@ -10,7 +10,7 @@
           {{!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" --}}
             <div class="twelve columns">
               <form action="/reg_numbers" method="post">
-              <input name="regValue" id="numberPlate" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA31004'"/>
+              <input name="regValue" id="numberPlate" maxlength="10" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA31004'"/>
                <input type="submit" value="Add"> 
               </form>
             </div>
