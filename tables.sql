@@ -52,6 +52,7 @@ INSERT INTO towns (town, location_indicator) VALUES ('Velddrif', 'CFP');
 INSERT INTO towns (town, location_indicator) VALUES ('Kuilsrivier & Brackenfell', 'CFR');
 INSERT INTO towns (town, location_indicator) VALUES ('Oudtshoorn', 'CG');
 INSERT INTO towns (town, location_indicator) VALUES ('Paarl & Franschhoek', 'CJ');
+INSERT INTO towns (town, location_indicator) VALUES ('Paarl', 'CJ');
 INSERT INTO towns (town, location_indicator) VALUES ('Malmesbury & Darling', 'CK');
 
 INSERT INTO towns (town, location_indicator) VALUES ('Stellenbosch', 'CL');
