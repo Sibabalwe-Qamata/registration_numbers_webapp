@@ -1,13 +1,8 @@
 var express = require('express');
 var path = require('path');
-
-
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
-
 let regNumFactory = require('./public/js/registrationPlates');
-
 var app = express();
 
 // view engine setup
@@ -46,6 +41,21 @@ const pool = new Pool({
 
 let regNumbers = regNumFactory(pool);
 
+//----------Flash Messanging -------------//
+const flash = require('express-flash');
+const session = require('express-session');
+// initialise session middleware - flash-express depends on it
+app.use(session({
+  secret : "<add a secret string here>",
+  resave: false,
+  saveUninitialized: true
+}));
+
+// initialise the flash middleware
+app.use(flash());
+
+//-----------------------------------------///
+
 app.get('/', async function(req, res) {
 
     try{
@@ -64,22 +74,32 @@ app.get('/', async function(req, res) {
         let town_locator = regValue.slice(0,3).toUpperCase().trim();
          await regNumbers.enterRegPlate(regValue, town_locator);
          let normalList = await regNumbers.getPlate();
-
          let displayRegs = normalList.reverse();
-
-        // console.log(displayRegs.reverse());
         res.render('home', {displayRegs});
     }
     catch(error){
     }
   });
 
+  app.get('/reg_numbers', async function(req, res)
+  {
+    try
+    {
 
+
+    }
+    catch(error)
+    {
+
+    }
+  })
+  
   app.get("/reset", async function(req,res){
     try{
         let deleteRegNumbs = await regNumbers.resetDataBase();
 
         //Need to add a flash message indicating that the DB has been resetted.
+        req.flash('info', 'The database has just been Cleared!');
         res.redirect("/");
     }
     catch(error){
