@@ -19,10 +19,16 @@ describe("The Registration Numbers WebApp Database Unit Tests", async function()
     await pool.query("delete from towns;");
   });
 
-  it("It should Return the  Registration Number Plate that was added to the Database.", async function() {
+  it("It should return the town ID of the town entered.", async function()
+  {
     let reg = await regNumFactory(pool);
-  ;
-    assert.equal(await reg.enterRegPlate("CA 1485"), "CA 1485");
+    assert.equal(await reg.validateInput("CA 1485"), 1);
+  });
+
+  it("It should return the town ID of the town entered.", async function() 
+  {
+    let reg = await regNumFactory(pool);
+    assert.equal(await reg.validateInput("CEO 1485"), 21);
   });
 
 });

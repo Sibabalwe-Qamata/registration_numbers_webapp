@@ -10,33 +10,26 @@ module.exports =  function(pool)
 
    // var plateStored = NumberPlateDatabase || {};
 
-    async function verifyInput(getRegNum)
-    {
-        if((getRegNum.length > 11))
-        {
-        return false;
-        }
-        else if((getRegNum.length <= 11))
-        {
-        return true;
-        }
-    }
-   
+   async function verifyInput(getRegNum)
+   {
+       let town_locator = getRegNum.slice(0,3).toUpperCase().trim();
+       let checkReg =  await pool.query('SELECT id FROM towns WHERE location_indicator=$1', [town_locator]);
+       return checkReg.rows[0].id;
+   }
+  
+    
      async function setRegPlate(numPlate) 
         {
-            if((numPlate.length > 11))
-            {
-            return false;
-            }
-            let town_locator = numPlate.slice(0,3).toUpperCase();
+
             let formatedPlate = numPlate.toUpperCase();
-            let checkReg =  await pool.query('SELECT id FROM reg_numbers WHERE reg_number=$1', [formatedPlate])
-    
-            if(checkReg.rowCount < 1){
-                await pool.query('INSERT into towns  (town_reg,location_indicator) values ($1,$2)', ['Cape Town',town_locator]);
-                await pool.query('INSERT into reg_numbers  (reg_number) values ($1)', [formatedPlate]);
-                return formatedPlate;
-            }
+                console.log( await getLocation());
+                console.log(formatedPlate);
+               //let  keep = await pool.query('INSERT into reg_numbers  (reg_number, town_id)', [formatedPlate, ]);
+
+            //    let  keep2 = await pool.query('INSERT INTO reg_numbers (reg_number)
+            //    VALUES (SELECT(id FROM user WHERE name='John Smith'), 83, 185);', [formatedPlate]);
+            
+            return formatedPlate;
 
         }
     async function getRegPlates()
@@ -75,6 +68,7 @@ module.exports =  function(pool)
         enterRegPlate: setRegPlate,
         validateInput: verifyInput,
         getPlate: getRegPlates,
+        
         resetDataBase: resetDB,
     
         filterTown:filterRegPlate
