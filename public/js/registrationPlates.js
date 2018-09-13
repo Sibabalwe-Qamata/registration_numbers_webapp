@@ -18,19 +18,13 @@ module.exports =  function(pool)
    }
   
     
-     async function setRegPlate(numPlate) 
+     async function setRegPlate(numPlate, town_id) 
         {
-
             let formatedPlate = numPlate.toUpperCase();
-                console.log( await getLocation());
-                console.log(formatedPlate);
-               //let  keep = await pool.query('INSERT into reg_numbers  (reg_number, town_id)', [formatedPlate, ]);
-
-            //    let  keep2 = await pool.query('INSERT INTO reg_numbers (reg_number)
-            //    VALUES (SELECT(id FROM user WHERE name='John Smith'), 83, 185);', [formatedPlate]);
-            
+            let location_id = await verifyInput(town_id);
+            //Need to add validation checks!!!
+            await pool.query('INSERT into reg_numbers  (reg_number, town_id) values ($1, $2)', [formatedPlate,location_id]);
             return formatedPlate;
-
         }
     async function getRegPlates()
     {

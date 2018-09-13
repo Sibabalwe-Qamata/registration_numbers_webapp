@@ -57,30 +57,20 @@ app.get('/', async function(req, res) {
     }
 
   });
-
-
   app.post('/reg_numbers', async function(req,res)
   {
     try{
-
         let {regValue} = req.body;
-        console.log(regValue)
         let town_locator = regValue.slice(0,3).toUpperCase().trim();
-        let locationId =  await regNumbers.validateInput(regValue);
-         //await regNumbers.enterRegPlate(regValue);
+         await regNumbers.enterRegPlate(regValue, town_locator);
+         let normalList = await regNumbers.getPlate();
 
-        //console.log(town_locator);
-        console.log("From the Database",locationId);
-        // console.log(await regNumbers.returnLocationId(regValue));
-        //let showPlates =  await regNumbers.getPlate();
-        //let displayRegs = showPlates.reverse();
+         let displayRegs = normalList.reverse();
 
-        res.render('home', {locationId});
-       // res.render('home');
-       // res.redirect("/");
+        // console.log(displayRegs.reverse());
+        res.render('home', {displayRegs});
     }
     catch(error){
-
     }
   });
 
