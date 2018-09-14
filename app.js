@@ -9,7 +9,17 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers :
+    {
+        selectTowns: function()
+        {
+            if(this.selectWhichTown){
+                return "selected";
+            }
+      
+        }
+    } 
 }));
 app.set('view engine', 'handlebars');
 
@@ -81,18 +91,23 @@ app.get('/', async function(req, res) {
     }
   });
 
-  app.get('/reg_numbers', async function(req, res)
+  app.get('/filter/:townTag', async function(req, res)
   {
     try
     {
+        let {townTag} = req.params;
+        //console.log(townTag);
 
+        let displayRegs=  await regNumbers.filterTown(townTag);
 
+        console.log(displayRegs);
+        res.render("home", {displayRegs});
     }
     catch(error)
     {
 
     }
-  })
+  });
   
   app.get("/reset", async function(req,res){
     try{

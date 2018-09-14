@@ -26,21 +26,17 @@
 
     <div class="row">
           <div class="twelve columns">
-
-            <form  class="" action="/reg_numbers" method="get">
+            
                 <div class="normalFilter">
-                    <label for="Town to Filter: "></label>
-                    <select class="selectWhichTown" name="selectTown">
-                      <option class="selectWhichTown" value="All">All Towns</option>
-                      <option class="selectWhichTown" value="CA ">Cape Town</option>
-                      <option class="selectWhichTown" value="CJ ">Paarl</option>
-                      <option class="selectWhichTown" value="CW ">Worcester</option>
+                    <select class="selectWhichTown" onclick="filterTown()" name="selectTown">
+                      <option class="selectWhichTown"  value="All">All Towns</option>
+                      <option class="selectWhichTowns" {{selectTowns}} value="CA">Cape Town</option>
+                      <option class="selectWhichTown" value="CJ">Paarl</option>
+                      <option class="selectWhichTown" value="CW">Worcester</option>
                       <option class="selectWhichTown" value="CAW">George</option>
                       <option class="selectWhichTown" value="CAW">Somerset West</option>
                     </select>
                   </div>
-            <button class="button show">Filter</button>
-            </form>
           </div>
     </div>
 
@@ -66,3 +62,11 @@
     </div>
 
   </div>
+
+  <script>
+    function filterTown (){
+      var selectedTown = document.querySelector(".selectWhichTown");
+
+      location.href = "/filter/"+selectedTown.value;
+    }
+  </script>
