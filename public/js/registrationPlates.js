@@ -24,6 +24,7 @@ module.exports = function (pool) {
         return formatedPlate;
     }
     async function getRegPlates() {
+       
         let allRegs = await pool.query('SELECT * from reg_numbers');
         return allRegs.rows;
     }
@@ -49,11 +50,24 @@ module.exports = function (pool) {
     }
 
     async function dropMenu(TownChoice) 
-    {
-        let townPicked = await pool.query('SELECT  town,location_indicator FROM towns');
+    {    
 
-       
-        
+        let townPicked = await pool.query('SELECT * FROM towns');
+       if(TownChoice != undefined || TownChoice !=''){
+        for(var k=0; k < 2; k++)
+        {
+            console.log('here');
+            
+            // if(townPicked.rows[k].location_indicator === TownChoice){
+            //     townPicked.rows[k].checked = true;
+
+            // }
+            
+        }
+       } 
+        return townPicked.rows;
+
+
     }
 
     return {
@@ -63,7 +77,8 @@ module.exports = function (pool) {
 
         resetDataBase: resetDB,
 
-        filterTown: filterRegPlate
+        filterTown: filterRegPlate,
+        dropDown : dropMenu
 
     }
 

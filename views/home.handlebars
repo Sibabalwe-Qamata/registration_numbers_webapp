@@ -30,11 +30,9 @@
                 <div class="normalFilter">
                     <select class="selectWhichTown" onclick="filterTown()" name="selectTown">
                       <option class="selectWhichTown"  value="All">All Towns</option>
-                      <option class="selectWhichTowns" {{selectTowns}} value="CA">Cape Town</option>
-                      <option class="selectWhichTown" value="CJ">Paarl</option>
-                      <option class="selectWhichTown" value="CW">Worcester</option>
-                      <option class="selectWhichTown" value="CAW">George</option>
-                      <option class="selectWhichTown" value="CAW">Somerset West</option>
+                      {{#each drop_down}}
+                      <option class="selectWhichTowns" {{selectTowns}} value="{{location_indicator}}">{{town}}</option>
+                        {{/each}}
                     </select>
                   </div>
           </div>

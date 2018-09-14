@@ -28,8 +28,6 @@ app.use(bodyParser.urlencoded());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', routes);
-// app.use('/reg_numbers', routes);
 
 //Database Connection ...
 const pg = require("pg");
@@ -70,7 +68,9 @@ app.get('/', async function(req, res) {
 
     try{
         let displayRegs =  await regNumbers.getPlate();
-        res.render('home', {displayRegs});
+           var drop_down = await regNumbers.dropDown();
+             console.log(drop_down.length)
+        res.render('home', {displayRegs,drop_down});
     }
     catch(error){
 
@@ -96,11 +96,11 @@ app.get('/', async function(req, res) {
     try
     {
         let {townTag} = req.params;
-        //console.log(townTag);
-
         let displayRegs=  await regNumbers.filterTown(townTag);
 
-        console.log(displayRegs);
+       // let drop_down = await regNumbers.dropDown(townTag);
+
+        //console.log(displayRegs);
         res.render("home", {displayRegs});
     }
     catch(error)
