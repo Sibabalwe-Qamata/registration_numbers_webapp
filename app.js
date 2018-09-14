@@ -14,7 +14,7 @@ app.engine('handlebars', exphbs({
     {
         selectTowns: function()
         {
-            if(this.selectWhichTown){
+            if(this.checked){
                 return "selected";
             }
       
@@ -68,8 +68,7 @@ app.get('/', async function(req, res) {
 
     try{
         let displayRegs =  await regNumbers.getPlate();
-           var drop_down = await regNumbers.dropDown();
-             console.log(drop_down.length)
+           let drop_down = await regNumbers.dropDown();
         res.render('home', {displayRegs,drop_down});
     }
     catch(error){
@@ -98,10 +97,10 @@ app.get('/', async function(req, res) {
         let {townTag} = req.params;
         let displayRegs=  await regNumbers.filterTown(townTag);
 
-       // let drop_down = await regNumbers.dropDown(townTag);
+        let drop_down = await regNumbers.dropDown(townTag);
 
         //console.log(displayRegs);
-        res.render("home", {displayRegs});
+        res.render("home", {displayRegs,drop_down});
     }
     catch(error)
     {

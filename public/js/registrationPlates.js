@@ -54,17 +54,18 @@ module.exports = function (pool) {
 
         let townPicked = await pool.query('SELECT * FROM towns');
        if(TownChoice != undefined || TownChoice !=''){
-        for(var k=0; k < 2; k++)
+        for(var k=0; k < townPicked.rows.length ; k++)
         {
-            console.log('here');
             
-            // if(townPicked.rows[k].location_indicator === TownChoice){
-            //     townPicked.rows[k].checked = true;
+            if(townPicked.rows[k].location_indicator === TownChoice){
+                townPicked.rows[k].checked = true;
 
-            // }
+            }
             
         }
        } 
+       console.log(townPicked.rows);
+       
         return townPicked.rows;
 
 
