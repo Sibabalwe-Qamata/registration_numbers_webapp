@@ -17,7 +17,7 @@
           {{!-- pattern='[A-Z]{2,3}\s\d{3}\W\d{3}|[A-Z]{2,3}\s\d{2,3}' --}}
             <div class="twelve columns">
               <form action="/reg_numbers" method="post">
-              <input name="regValue" id="numberPlate"  maxlength="11" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA31004'"/>
+              <input name="regValue" id="numberPlate"  maxlength="11" pattern="[A-Z]{2,3}\s\d{3}\W\d{3}|[A-Z]{2,3}\s\d{2,8}" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA 310-104 OR CAW 0034'"/>
                <input type="submit" value="Add"> 
               </form>
             </div>
