@@ -96,10 +96,7 @@ app.get('/', async function(req, res) {
     {
         let {townTag} = req.params;
         let displayRegs=  await regNumbers.filterTown(townTag);
-
         let drop_down = await regNumbers.dropDown(townTag);
-
-        //console.log(displayRegs);
         res.render("home", {displayRegs,drop_down});
     }
     catch(error)
@@ -113,7 +110,7 @@ app.get('/', async function(req, res) {
         let deleteRegNumbs = await regNumbers.resetDataBase();
 
         //Need to add a flash message indicating that the DB has been resetted.
-        req.flash('info', 'The database has just been Cleared!');
+        req.flash('info', 'The database has just been cleared!');
         res.redirect("/");
     }
     catch(error){

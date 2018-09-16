@@ -1,14 +1,6 @@
 "use strict";
 module.exports = function (pool) {
 
-    let numberPlateDisplay;
-    let town = '';
-    let RegItem;
-
-    let townsList = [];
-
-    // var plateStored = NumberPlateDatabase || {};
-
     async function verifyInput(getRegNum) {
         let town_locator = getRegNum.slice(0, 3).toUpperCase().trim();
         let checkReg = await pool.query('SELECT id FROM towns WHERE location_indicator=$1', [town_locator]);
@@ -70,6 +62,7 @@ module.exports = function (pool) {
 
 
     }
+
 
     return {
         enterRegPlate: setRegPlate,

@@ -1,22 +1,23 @@
   <div class="container">
-    <div class="row">
+    <div class="row header">
       <div class="twelve columns"> 
-        <h1>Registration Numberplates</h1>
+        <h1>Registration Numberplates Webapp</h1>
       </div>
     </div>
 
     <div class="row entry">
         <div class="twelve columns">
-           <h1>{{messages.info}}</h1>
+           <p id="messages">{{messages.info}}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="twelve columns">
           {{!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" --}}
+          {{!-- pattern='[A-Z]{2,3}\s\d{3}\W\d{3}|[A-Z]{2,3}\s\d{2,3}' --}}
             <div class="twelve columns">
               <form action="/reg_numbers" method="post">
-              <input name="regValue" id="numberPlate" maxlength="10" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA31004'"/>
+              <input name="regValue" id="numberPlate"  maxlength="11" onkeyup="lettersOnly(this)" placeholder="enter registration number" class="regNumber"   title="Please enter a Number Plate e.g 'CA31004'"/>
                <input type="submit" value="Add"> 
               </form>
             </div>
@@ -50,13 +51,21 @@
             </ul>
       </div>
     </div>
-
+<hr>
     <div class="row">
       <div class="twelve columns">
           <a href="/reset">
               <button class="button reset">Reset</button>
           </a>
       </div>
+    </div>
+<hr>
+    <div class="row">
+        <div class="twelve columns">
+            <footer>
+                <p>Proudly developed by Sibabalwe Qamata &copy; 2018</p>
+            </footer>
+        </div>
     </div>
 
   </div>

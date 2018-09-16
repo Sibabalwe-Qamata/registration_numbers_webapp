@@ -3,16 +3,24 @@ h1 {
     margin: 10px auto;
     font-size: 4em;
     color: #333;
+    text-decoration-style: wavy;
+    text-underline-position: below;
 
 }
 
 body {
     text-align: center;
     margin: 0px auto;
-    background-color: #cdcdcd;
+    background: #E0EAFC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     font-family: Arial, Helvetica, sans-serif;
+   
 
 }
+
+
 
 .button:hover,
 .button:focus {
@@ -102,13 +110,24 @@ span{
     font-size: 85%;
 
   }
-
+.header{
+    border: 1px solid #000;
+}
+.entry{
+    color: green;
+  
+}
+#messages{
+    font-size: 120%;
+    text-decoration-color: green;
+    
+}
 #box{
     border: 1px solid #000;
     border-radius: 4%;
 }
 
-  
+
 
 
 
