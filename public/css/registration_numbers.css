@@ -91,6 +91,10 @@ span{
 
 }
 
+.townsNotFound{
+    color: green;
+}
+
 * {
     box-sizing: border-box;
   }

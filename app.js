@@ -26,6 +26,8 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
+//app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -102,7 +104,18 @@ app.get('/', async function(req, res) {
         let {townTag} = req.params;
         let displayRegs=  await regNumbers.filterTown(townTag);
         let drop_down = await regNumbers.dropDown(townTag);
+        console.log(displayRegs.length);
+
         res.render("home", {displayRegs,drop_down});
+        // if (displayRegs.length != 0)
+        // {
+        //     res.render("home", {displayRegs,drop_down});
+            
+        // }
+        // else{
+        //     req.flash('info', 'Town selected is not found!');
+        // }
+        
     }
     catch(error)
     {
