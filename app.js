@@ -80,6 +80,11 @@ app.get('/', async function(req, res) {
   {
     try{
         let {regValue} = req.body;
+        if(regValue == "")
+        {
+            req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
+            res.redirect("/");  
+        }
         let town_locator = regValue.slice(0,3).toUpperCase().trim();
          await regNumbers.enterRegPlate(regValue, town_locator);
          let normalList = await regNumbers.getPlate();
