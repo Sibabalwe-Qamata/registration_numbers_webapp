@@ -82,7 +82,8 @@ app.get('/', async function(req, res) {
   {
     try{
         let {regValue} = req.body;
-        if(regValue == "")
+        console.log(regValue.startsWith("C"));        
+        if(regValue == "" || (regValue.startsWith("C") === false))
         {
             req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
             res.redirect("/");  
