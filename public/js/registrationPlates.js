@@ -55,12 +55,8 @@ module.exports = function (pool) {
             }
             
         }
-       } 
-       console.log(townPicked.rows);
-       
+       }    
         return townPicked.rows;
-
-
     }
 
 
