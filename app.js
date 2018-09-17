@@ -69,7 +69,9 @@ app.use(flash());
 app.get('/', async function(req, res) {
 
     try{
-        let displayRegs =  await regNumbers.getPlate();
+        let normalList = await regNumbers.getPlate();
+         let displayRegs = normalList.reverse();
+       
            let drop_down = await regNumbers.dropDown();
         res.render('home', {displayRegs,drop_down});
     }
@@ -78,27 +80,48 @@ app.get('/', async function(req, res) {
     }
 
   });
-  app.post('/reg_numbers', async function(req,res)
+  app.post('/reg_numbers', async function(req, res, next)
   {
     try{
         let {regValue} = req.body;
-        
-        let repeatedReg = await  regNumbers.duplicate(regValue);
-        
-        if(regValue == "" || (regValue.startsWith("C") === false) || (repeatedReg === 1))
-        {
-            req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
-            res.redirect("/");  
-        }
-        let town_locator = regValue.slice(0,3).toUpperCase().trim();
-         await regNumbers.enterRegPlate(regValue, town_locator);
-         let normalList = await regNumbers.getPlate();
-         let displayRegs = normalList.reverse();
-         let drop_down = await regNumbers.dropDown();
 
-        res.render('home', {displayRegs, drop_down});
+        // // const invalidRegNumberFormat = regValue == "" || (regValue.startsWith("C") === false) || (repeatedReg === 1);
+        // if(invalidRegNumberFormat) {
+        //     req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
+        //     res.redirect("/");  
+        // }
+
+        // const repeatedReg = await regNumbers.duplicateRegNumber(regValue);
+        // if(repeatedReg) {
+        //     req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
+        //     res.redirect("/");  
+        // }
+
+        // if(invalidLocationRegNumber) {
+        //     req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
+        //     res.redirect("/");  
+        // }
+
+
+        //
+        let result = await regNumbers.enterRegPlate(regValue);
+        // if (result.success) {
+
+        //     let normalList = await regNumbers.getPlate();
+        //     let displayRegs = normalList.reverse();
+        //     let drop_down = await regNumbers.dropDown();
+        //     // ? why not redirect to '/'
+        //     //return res.render('home', {displayRegs, drop_down});
+        // }
+        
+        req.flash('info', result.message);
+        res.redirect("/");  
+        
+
+
     }
     catch(error){
+        next(error);
     }
   });
 
@@ -112,14 +135,7 @@ app.get('/', async function(req, res) {
    
 
         res.render("home", {displayRegs,drop_down});
-        // if (displayRegs.length != 0)
-        // {
-        //     res.render("home", {displayRegs,drop_down});
-            
-        // }
-        // else{
-        //     req.flash('info', 'Town selected is not found!');
-        // }
+      
         
     }
     catch(error)

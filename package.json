@@ -24,7 +24,9 @@
   "directories": {
     "test": "mocha"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sibabalwe-Qamata/registration_numbers_webapp.git"
