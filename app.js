@@ -91,7 +91,8 @@ app.get('/', async function(req, res) {
          await regNumbers.enterRegPlate(regValue, town_locator);
          let normalList = await regNumbers.getPlate();
          let displayRegs = normalList.reverse();
-        res.render('home', {displayRegs});
+         let drop_down = await regNumbers.dropDown();
+        res.render('home', {displayRegs, drop_down});
     }
     catch(error){
     }
