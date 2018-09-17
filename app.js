@@ -104,7 +104,7 @@ app.get('/', async function(req, res) {
         let {townTag} = req.params;
         let displayRegs=  await regNumbers.filterTown(townTag);
         let drop_down = await regNumbers.dropDown(townTag);
-        console.log(displayRegs.length);
+   
 
         res.render("home", {displayRegs,drop_down});
         // if (displayRegs.length != 0)
