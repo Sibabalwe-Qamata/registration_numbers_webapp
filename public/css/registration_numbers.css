@@ -20,6 +20,10 @@ body {
 
 }
 
+#numberPlate{
+    padding: 0.55em;
+}
+
 
 
 .button:hover,
