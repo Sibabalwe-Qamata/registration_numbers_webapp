@@ -29,7 +29,7 @@
           <div class="twelve columns">
             
                 <div class="normalFilter">
-                    <select class="selectWhichTown" onclick="filterTown()" name="selectTown">
+                    <select class="selectWhichTown" onchange="filterTown()" name="selectTown">
                       <option class="selectWhichTown"  value="All">All Towns</option>
                       {{#each drop_down}}
                       <option class="selectWhichTowns" {{selectTowns}} value="{{location_indicator}}">{{town}}</option>
