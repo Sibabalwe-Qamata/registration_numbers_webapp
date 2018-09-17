@@ -82,8 +82,10 @@ app.get('/', async function(req, res) {
   {
     try{
         let {regValue} = req.body;
-        console.log(regValue.startsWith("C"));        
-        if(regValue == "" || (regValue.startsWith("C") === false))
+        
+        let repeatedReg = await  regNumbers.duplicate(regValue);
+        
+        if(regValue == "" || (regValue.startsWith("C") === false) || (repeatedReg === 1))
         {
             req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
             res.redirect("/");  
@@ -93,6 +95,7 @@ app.get('/', async function(req, res) {
          let normalList = await regNumbers.getPlate();
          let displayRegs = normalList.reverse();
          let drop_down = await regNumbers.dropDown();
+
         res.render('home', {displayRegs, drop_down});
     }
     catch(error){

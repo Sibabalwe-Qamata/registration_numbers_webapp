@@ -51,7 +51,6 @@ module.exports = function (pool) {
             
             if(townPicked.rows[k].location_indicator === TownChoice){
                 townPicked.rows[k].checked = true;
-
             }
             
         }
@@ -59,6 +58,14 @@ module.exports = function (pool) {
         return townPicked.rows;
     }
 
+    async function duplicateCheck(reg)
+    {
+        let FilterDuplicate = await pool.query('SELECT * FROM reg_numbers WHERE reg_number=$1',[reg]);
+
+
+        //console.log(FilterDuplicate);
+        return FilterDuplicate.rowCount;  
+    }
 
     return {
         enterRegPlate: setRegPlate,
@@ -68,7 +75,8 @@ module.exports = function (pool) {
         resetDataBase: resetDB,
 
         filterTown: filterRegPlate,
-        dropDown : dropMenu
+        dropDown : dropMenu,
+        duplicate : duplicateCheck
 
     }
 
