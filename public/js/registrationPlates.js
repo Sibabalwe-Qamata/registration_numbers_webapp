@@ -11,8 +11,8 @@ module.exports = function (pool) {
     async function setRegPlate(regValue) {
 
         let town_id = regValue.slice(0,3).toUpperCase().trim();
-        
-        const invalidRegNumberFormat = (regValue == "" || (regValue.startsWith("C") === false));
+       
+        const invalidRegNumberFormat = (regValue == "");
         if(invalidRegNumberFormat){
             return {
                 success: false,

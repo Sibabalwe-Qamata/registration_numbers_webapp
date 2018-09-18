@@ -84,41 +84,10 @@ app.get('/', async function(req, res) {
   {
     try{
         let {regValue} = req.body;
-
-        // // const invalidRegNumberFormat = regValue == "" || (regValue.startsWith("C") === false) || (repeatedReg === 1);
-        // if(invalidRegNumberFormat) {
-        //     req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
-        //     res.redirect("/");  
-        // }
-
-        // const repeatedReg = await regNumbers.duplicateRegNumber(regValue);
-        // if(repeatedReg) {
-        //     req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
-        //     res.redirect("/");  
-        // }
-
-        // if(invalidLocationRegNumber) {
-        //     req.flash('info', 'Please enter a registration number e.g(CA 142-0144/CAW 5846)!');
-        //     res.redirect("/");  
-        // }
-
-
-        //
         let result = await regNumbers.enterRegPlate(regValue);
-        // if (result.success) {
-
-        //     let normalList = await regNumbers.getPlate();
-        //     let displayRegs = normalList.reverse();
-        //     let drop_down = await regNumbers.dropDown();
-        //     // ? why not redirect to '/'
-        //     //return res.render('home', {displayRegs, drop_down});
-        // }
-        
+       
         req.flash('info', result.message);
         res.redirect("/");  
-        
-
-
     }
     catch(error){
         next(error);

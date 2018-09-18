@@ -29,7 +29,7 @@ describe("The Registration Numbers WebApp Database Unit Tests", async function()
   it("It should return the town ID of the town entered (i.e George).", async function()
   {
     let reg = await regNumFactory(pool);
-    await reg.enterRegPlate("CAW 1364", "CAW")
+    await reg.enterRegPlate("CAW 1364")
     assert.equal(await reg.validateInput("CAW"),4);
   });
 
@@ -40,11 +40,31 @@ describe("The Registration Numbers WebApp Database Unit Tests", async function()
     assert.equal(await reg.validateInput("CJ"),10);
   });
 
-  it("It should return the registration number of the town entered formated i.e(CJ 5246).", async function() 
+  it("It should return a message about the registration number of the town entered i.e(CJ 5246).", async function() 
   {
     let reg = await regNumFactory(pool);
+     let enteredRegPlate = await reg.enterRegPlate("CJ 5246");
 
-    assert.equal(await reg.enterRegPlate("CJ 5246", "CJ"),"CJ 5246");
+    assert.equal(enteredRegPlate.message,"Successfully Added Registration Number");
+  });
+
+  // it("It should return  an error message for the registration number of the town entered i.e(CJ 5219).", async function() 
+  // {
+  //   let reg = await regNumFactory(pool);
+  //    await reg.enterRegPlate("CJ 5219");
+  //    await reg.enterRegPlate("CJ 5219");
+  //    let enteredRegPlate = await reg.enterRegPlate();
+    
+
+  //   assert.equal(enteredRegPlate.message,"You have entered a duplicate Registration Number. Please enter another Registration Number");
+  // });
+
+  it("It should return an error message about the registration number of the town entered i.e(PQ 5246).", async function() 
+  {
+    let reg = await regNumFactory(pool);
+     let enteredRegPlate = await reg.enterRegPlate("PQ 5246");
+
+    assert.equal(enteredRegPlate.message,"The Registration Number entered is invalid.");
   });
 
 
