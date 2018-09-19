@@ -85,9 +85,20 @@ app.get('/', async function(req, res) {
     try{
         let {regValue} = req.body;
         let result = await regNumbers.enterRegPlate(regValue);
-       
+
+       if(result.success === true)
+       {
         req.flash('info', result.message);
-        res.redirect("/");  
+        res.redirect("/"); 
+       }
+       else if(result.success === false)
+       {
+    
+        req.flash('error', result.message);
+        res.redirect("/"); 
+       }
+       
+   
     }
     catch(error){
         next(error);
