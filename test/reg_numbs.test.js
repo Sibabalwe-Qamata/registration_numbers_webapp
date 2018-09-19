@@ -1,7 +1,7 @@
 "use scrict";
 
 let assert = require("assert");
-let regNumFactory = require('../public/js/registrationPlates');
+let regNumFactory = require('../registration_plates');
 
 const pg = require("pg");
 const Pool = pg.Pool;
